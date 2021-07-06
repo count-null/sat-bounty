@@ -1,7 +1,7 @@
 # sat-bounty
 A self-hosted audience polling engine powered by Bitcoin
 
-MVP is something like Bitcoinaudible.com/vote
+MVP is something like [Bitcoin Audible's vote page](https://bitcoinaudible.com/vote/)
 
 A WordPress integration using BTCpayserver plugin would probably get the most action.
 
