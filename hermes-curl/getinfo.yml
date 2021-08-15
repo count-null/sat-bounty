@@ -1,0 +1,3 @@
+from: api_base.yml
+method: GET
+path: /ln/getinfo

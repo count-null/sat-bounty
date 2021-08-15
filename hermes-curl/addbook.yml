@@ -1,0 +1,9 @@
+from: api_base.yml
+method: POST
+path: /books
+body: >
+  {
+    "isbn": 837,
+    "author": "MEEEEEE",
+    "title": "solo fail"
+  }

@@ -1,0 +1,8 @@
+from: api_base.yml
+method: POST
+path: /ln/invoices
+body: >
+  {
+    "memo": "hello world, now pay me!",
+    "amount": 6102
+  }
