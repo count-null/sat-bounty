@@ -1,17 +1,20 @@
 # sat-bounty
-A self-hosted audience polling engine powered by Bitcoin
+A self-hosted audience polling engine backed by Bitcoin
 
-MVP is something like [Bitcoin Audible's vote page](https://bitcoinaudible.com/vote/)
+## dev setup
 
-A WordPress integration using BTCpayserver plugin would probably get the most action.
+1. [install deno](https://deno.land/#installation)
 
-Admin sets up the bounties
-Anons boost their favorite bounty
-Admin delivers the bounty to the world.
-Admin "Claims" sats.
+2. install `denon` for that sweet, sweet live reloading during development
 
-In reality. The admin has the sats as soon as they're donated. More of a UI thing.
+`deno install --allow-read --allow-run --allow-write -f --unstable https://deno.land/x/denon/denon.ts`
 
-Allows organizations to get high signal information about what thier audience wants.
+3. launch the API
 
-Vote with your sats
+`denon run --allow-env --allow-net --unsafely-ignore-certificate-errors=localhost app.ts`
+
+## recommended tooling
+
+[polar](https://lightningpolar.com/) is great for spawning virtual LN nodes
+
+[hermes](https://github.com/newswangerd/hermes-curl) is great for quickly testing the API
