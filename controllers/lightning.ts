@@ -1,29 +1,34 @@
-import {MACAROON, LNDPORT, LNDHOST} from '../vars.ts';  
+import { MACAROON, LNDPORT, LNDHOST } from "../vars.ts";
 
-const baseUrl = `https://${LNDHOST}:${LNDPORT}/v1`
+const baseUrl = `https://${LNDHOST}:${LNDPORT}/v1`;
 
 interface IOptions {
-  method: string;
+  method?: string;
   headers: string;
-  body: string;
+  body?: string;
 }
 
 let options = {
   headers: {
-    'Grpc-Metadata-macaroon': MACAROON,
-    'Content-Type': 'application/json'
+    "Grpc-Metadata-macaroon": MACAROON,
+    "Content-Type": "application/json",
   },
-}
+};
 
-const getInfo = async ({ response }: { response: any }) => { 
-  let lndResponse = await fetch(baseUrl + '/getinfo', options);
+const getInfo = async ({ response }: { response: any }) => {
+  let lndResponse = await fetch(baseUrl + "/getinfo", options);
   let result = await lndResponse.json();
-  response.body = result 
-}
+  response.body = result;
+};
 
-const addInvoice = async ({ request, response }: { request: any; response: any }) => {
-  const {memo, amount} = await request.body().value
-  console.log({memo, amount})
+const addInvoice = async ({
+  request,
+  response,
+}: {
+  request: any;
+  response: any;
+}) => {
+  const { memo, amount } = await request.body().value;
 
   interface IRequestBody {
     memo: string;
@@ -34,8 +39,8 @@ const addInvoice = async ({ request, response }: { request: any; response: any }
   }
 
   let requestBody: IRequestBody = {
-    memo, 
-    expiry: '3600',
+    memo,
+    expiry: "3600",
     private: false,
   };
 
@@ -45,23 +50,19 @@ const addInvoice = async ({ request, response }: { request: any; response: any }
     requestBody.value = amount.toString();
   }
 
-  console.log({requestBody: JSON.stringify(requestBody)})
-  
-  let lndResponse = await fetch(baseUrl + '/invoices',{
-    method: 'post',
+  let lndResponse = await fetch(baseUrl + "/invoices", {
+    method: "post",
     headers: {
-      'Grpc-Metadata-macaroon': MACAROON,
-      'Content-Type': 'application/json'
+      "Grpc-Metadata-macaroon": MACAROON,
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(requestBody)
+    body: JSON.stringify(requestBody),
   });
-  
-  console.log(lndResponse)
+
   let result = await lndResponse.json();
-  console.log(result)
 
-  response.body = result
-  response.status = 200
-}
+  response.body = result;
+  response.status = 200;
+};
 
-export { getInfo, addInvoice }
+export { getInfo, addInvoice };
